@@ -1,0 +1,108 @@
+.fleet-loading {
+  color: var(--p3-muted);
+  padding: 20px;
+}
+
+.fleet-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+/* KPI card */
+.stat-card {
+  background: var(--p3-card);
+  border: 1px solid var(--p3-line);
+  border-radius: 8px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-card--accent {
+  box-shadow: inset 6px 0 0 var(--p3-dodger-blue);
+  padding-left: 22px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--p3-stratos);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--p3-muted);
+  font-weight: 500;
+}
+
+.state-section {
+  background: var(--p3-card);
+  border: 1px solid var(--p3-line);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+/* Card title: 16 / 700 */
+.state-heading {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--p3-stratos);
+  margin: 0 0 16px;
+}
+
+.state-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.state-bar-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 40px;
+  align-items: center;
+  gap: 10px;
+}
+
+.state-bar-label {
+  font-size: 13px;
+  color: var(--p3-text);
+  font-weight: 500;
+  text-align: right;
+  text-transform: capitalize;
+}
+
+.state-bar-track {
+  height: 10px;
+  background: var(--p3-queued-tint);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.state-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: var(--p3-dodger-blue);
+  transition: width 0.4s ease;
+}
+
+.state-bar-fill--connected { background: var(--p3-pass); }
+.state-bar-fill--disconnected { background: var(--p3-queued); }
+.state-bar-fill--charging { background: var(--p3-running); }
+.state-bar-fill--idle { background: var(--p3-queued); }
+.state-bar-fill--faulted { background: var(--p3-fail); }
+.state-bar-fill--unknown { background: var(--p3-line); }
+
+.state-bar-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--p3-text);
+}

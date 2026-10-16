@@ -1,0 +1,51 @@
+.vcp-controls {
+  background: var(--p3-card);
+  border: 1px solid var(--p3-line);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.vcp-controls-heading {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--p3-stratos);
+  margin: 0 0 16px;
+}
+
+.vcp-controls-error {
+  font-size: 13px;
+  color: var(--p3-fail);
+  background: var(--p3-fail-tint);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.vcp-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+/* Secondary action style */
+.ctrl-btn {
+  padding: 9px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--p3-dodger-blue);
+  background: var(--p3-card);
+  color: var(--p3-dodger-blue);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  text-align: left;
+}
+
+.ctrl-btn:hover:not(:disabled) {
+  background: var(--p3-blue-tint);
+}
+
+.ctrl-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

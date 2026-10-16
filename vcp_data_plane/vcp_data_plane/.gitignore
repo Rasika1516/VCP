@@ -1,0 +1,30 @@
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Secrets / local config (keep the examples) ---
+.env
+.env.*
+!.env.example
+
+# --- Runtime output (redis_publish.log etc.) ---
+logs/
+*.log
+
+# --- Editor / OS ---
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini

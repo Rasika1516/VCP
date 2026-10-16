@@ -1,0 +1,116 @@
+/* ============================================================
+   VCP Control Plane — P3 Design Tokens & Base Styles
+   ============================================================ */
+
+:root {
+  /* P3 brand */
+  --p3-stratos: #000033;
+  --p3-dodger-blue: #3365FF;
+  --p3-dodger-blue-hover: #2452E0;
+  --p3-canary: #DBFF55;
+
+  /* P3 neutrals */
+  --p3-background: #F5F6FA;
+  --p3-card: #FFFFFF;
+  --p3-line: #DADDE8;
+  --p3-text: #0B0833;
+  --p3-muted: #5F6480;
+
+  /* P3 status (always paired with a label or icon) */
+  --p3-pass: #1E9E5A;
+  --p3-fail: #D64545;
+  --p3-warn: #E0A100;
+  --p3-running: #7A5AF8;
+  --p3-queued: #8A94A6;
+
+  /* Status / brand tints (chip backgrounds, from the P3 reference) */
+  --p3-pass-tint: #E3F5EA;
+  --p3-fail-tint: #FBE4E4;
+  --p3-warn-tint: #FCF1D0;
+  --p3-running-tint: #EEE9FE;
+  --p3-queued-tint: #ECEFF3;
+  --p3-blue-tint: #E3EAFF;
+  --p3-stratos-tint: #E4E4EE;
+
+  /* Typography */
+  --p3-font: 'Montserrat', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Legacy aliases — map the original token names onto the P3 palette */
+  --bg: var(--p3-background);
+  --surface-1: var(--p3-card);
+  --surface-2: var(--p3-background);
+  --border: var(--p3-line);
+  --border-faint: #ECEEF4;
+  --text-primary: var(--p3-text);
+  --text-secondary: var(--p3-muted);
+  --text-tertiary: var(--p3-muted);
+  --accent: var(--p3-dodger-blue);
+  --accent-muted: var(--p3-blue-tint);
+
+  --radius: 8px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: var(--p3-font);
+  font-size: 14px;
+  font-weight: 400;
+  background: var(--p3-background);
+  color: var(--p3-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Form controls don't inherit the font by default */
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+::placeholder { color: var(--p3-muted); opacity: 1; }
+
+:focus-visible {
+  outline: 2px solid var(--p3-dodger-blue);
+  outline-offset: 2px;
+}
+
+/* App shell */
+.app-shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--p3-background);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--p3-line); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--p3-queued); }
+
+/* Selection */
+::selection { background: var(--p3-dodger-blue); color: #fff; }
+
+/* Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}

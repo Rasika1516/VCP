@@ -1,0 +1,87 @@
+.vcp-card {
+  background: var(--p3-card);
+  border: 1px solid var(--p3-line);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+}
+
+.vcp-card:hover {
+  border-color: var(--p3-dodger-blue);
+  box-shadow: 0 0 0 2px var(--p3-blue-tint);
+}
+
+.vcp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vcp-card-id {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--p3-stratos);
+  font-family: var(--font-mono);
+}
+
+.vcp-conn-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  background: var(--p3-queued-tint);
+  color: var(--p3-queued);
+}
+
+.vcp-conn-badge--connected { background: var(--p3-pass-tint); color: var(--p3-pass); }
+.vcp-conn-badge--disconnected { background: var(--p3-queued-tint); color: var(--p3-queued); }
+.vcp-conn-badge--faulted { background: var(--p3-fail-tint); color: var(--p3-fail); }
+
+.vcp-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.vcp-card-meta {
+  color: var(--p3-muted);
+  font-weight: 500;
+}
+
+.vcp-card-val {
+  color: var(--p3-text);
+  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.vcp-state-chip {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  background: var(--p3-queued-tint);
+  color: var(--p3-queued);
+}
+
+.vcp-state-chip--charging { background: var(--p3-running-tint); color: var(--p3-running); }
+.vcp-state-chip--idle { background: var(--p3-queued-tint); color: var(--p3-queued); }
+.vcp-state-chip--faulted { background: var(--p3-fail-tint); color: var(--p3-fail); }
+
+.vcp-card-footer {
+  font-size: 12px;
+  color: var(--p3-muted);
+  margin-top: 4px;
+}

@@ -1,0 +1,48 @@
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 24px 24px 0;
+  margin-bottom: 24px;
+}
+
+/* Screen title: 28 / 700 */
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--p3-stratos);
+  margin: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ws-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.ws-badge--on {
+  background: var(--p3-pass-tint);
+  color: var(--p3-pass);
+}
+
+.ws-badge--off {
+  background: var(--p3-fail-tint);
+  color: var(--p3-fail);
+}
+
+@media (max-width: 768px) {
+  .page-title { font-size: 22px; }
+}

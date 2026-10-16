@@ -1,0 +1,153 @@
+.sidebar {
+  width: 240px;
+  background: var(--p3-stratos);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 64px;
+  padding: 0 20px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #FFFFFF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-logo-img {
+  display: block;
+  height: 38px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+}
+
+/* Active item: Canary indicator bar on Stratos */
+.sidebar-link--active {
+  background: rgba(51, 101, 255, 0.22);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.sidebar-link--active::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 0 3px 3px 0;
+  background: var(--p3-canary);
+}
+
+.sidebar-link--active svg {
+  color: var(--p3-canary);
+}
+
+.sidebar-link:focus-visible {
+  outline-color: var(--p3-canary);
+}
+
+.sidebar-footer {
+  padding: 16px 20px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebar-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-status-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--p3-queued);
+}
+
+.sidebar-status-dot--up { background: var(--p3-pass); box-shadow: 0 0 0 4px rgba(30, 158, 90, 0.25); }
+.sidebar-status-dot--down { background: var(--p3-fail); box-shadow: 0 0 0 4px rgba(214, 69, 69, 0.25); }
+
+.sidebar-status-label {
+  font-size: 13px;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.sidebar-status-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sidebar-status-value--up { color: #4ADE80; }
+.sidebar-status-value--down { color: #F87171; }
+
+.sidebar-version { line-height: 1.5; }
+
+/* Narrow screens: collapse to an icon rail so content stays usable */
+@media (max-width: 768px) {
+  .sidebar { width: 64px; }
+
+  .sidebar-logo {
+    justify-content: center;
+    padding: 16px 0;
+  }
+
+  .sidebar-logo > span,
+  .sidebar-link > span,
+  .sidebar-footer {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .sidebar-link {
+    justify-content: center;
+    padding: 10px 0;
+  }
+}

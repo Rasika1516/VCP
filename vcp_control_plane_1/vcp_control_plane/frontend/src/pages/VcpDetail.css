@@ -1,0 +1,141 @@
+.vcp-detail-topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 24px 16px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--p3-card);
+  border: 1px solid var(--p3-dodger-blue);
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--p3-dodger-blue);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.back-btn:hover { background: var(--p3-blue-tint); }
+
+.icon-btn {
+  background: var(--p3-card);
+  border: 1px solid var(--p3-line);
+  border-radius: 6px;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--p3-muted);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.icon-btn:hover { color: var(--p3-dodger-blue); border-color: var(--p3-dodger-blue); }
+
+.vcp-detail-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 20px;
+  padding: 0 24px;
+}
+
+@media (max-width: 900px) {
+  .vcp-detail-grid { grid-template-columns: 1fr; }
+}
+
+.vcp-detail-left,
+.vcp-detail-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-card {
+  background: var(--p3-card);
+  border: 1px solid var(--p3-line);
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+/* Card title: 16 / 700 */
+.detail-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--p3-stratos);
+  margin: 0 0 14px;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-faint);
+  font-size: 14px;
+}
+
+.meta-row:last-child { border-bottom: none; }
+
+.meta-label { color: var(--p3-muted); font-weight: 500; }
+.meta-value { color: var(--p3-text); font-family: var(--font-mono); font-size: 12px; }
+
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+/* Class names are kept for JSX compatibility; colours map to P3 status semantics */
+.badge--green { background: var(--p3-pass-tint); color: var(--p3-pass); }       /* connected */
+.badge--blue { background: var(--p3-running-tint); color: var(--p3-running); }  /* charging */
+.badge--purple { background: var(--p3-queued-tint); color: var(--p3-queued); }  /* idle */
+.badge--red { background: var(--p3-fail-tint); color: var(--p3-fail); }         /* faulted */
+.badge--gray { background: var(--p3-queued-tint); color: var(--p3-queued); }    /* unknown / disconnected */
+
+.json-pre {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--p3-text);
+  background: var(--p3-background);
+  border: 1px solid var(--border-faint);
+  border-radius: 6px;
+  padding: 10px 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 0;
+}
+
+.audit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.audit-empty { color: var(--p3-muted); font-size: 14px; }
+
+.audit-row {
+  display: grid;
+  grid-template-columns: 1fr 100px 130px;
+  gap: 8px;
+  font-size: 12px;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.audit-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.audit-type { font-family: var(--font-mono); color: var(--p3-text); font-weight: 600; }
+.audit-ts { color: var(--p3-muted); }
+
+.audit-status { font-weight: 700; font-size: 11px; text-transform: uppercase; }
+.audit-status--dispatched { color: var(--p3-warn); }
+.audit-status--acknowledged { color: var(--p3-pass); }
+.audit-status--failed { color: var(--p3-fail); }

@@ -1,0 +1,160 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 64px;
+  padding: 0 24px;
+  background: var(--p3-card);
+  border-bottom: 1px solid var(--p3-line);
+  flex-shrink: 0;
+}
+
+.topbar-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  max-width: 720px;
+}
+
+.topbar-search-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--p3-muted);
+  pointer-events: none;
+}
+
+.topbar-search input {
+  width: 100%;
+  height: 40px;
+  padding: 0 90px 0 42px;
+  border: 1px solid var(--p3-line);
+  border-radius: 8px;
+  background: var(--p3-card);
+  color: var(--p3-text);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.topbar-search input:focus {
+  border-color: var(--p3-dodger-blue);
+  box-shadow: 0 0 0 3px var(--p3-blue-tint);
+}
+
+.topbar-kbd {
+  position: absolute;
+  right: 8px;
+  font-family: var(--p3-font);
+  font-size: 12px;
+  color: var(--p3-muted);
+  border: 1px solid var(--p3-line);
+  border-radius: 5px;
+  padding: 2px 8px;
+  background: var(--p3-background);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Control plane status pill */
+.cp-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cp-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.cp-status--live { background: var(--p3-pass-tint); color: var(--p3-pass); }
+.cp-status--live .cp-status-dot { animation: pulse 2s infinite; }
+.cp-status--down { background: var(--p3-fail-tint); color: var(--p3-fail); }
+.cp-status--pending { background: var(--p3-queued-tint); color: var(--p3-muted); }
+
+.topbar-icon-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--p3-stratos);
+  cursor: pointer;
+}
+
+.topbar-icon-btn:hover { background: var(--p3-background); }
+
+.topbar-bell-dot {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--p3-fail);
+  border: 2px solid var(--p3-card);
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--p3-stratos);
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+
+.topbar-user:hover { background: var(--p3-background); }
+
+.topbar-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--p3-stratos);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@media (max-width: 1024px) {
+  .topbar-kbd { display: none; }
+  .topbar-search input { padding-right: 12px; }
+}
+
+@media (max-width: 768px) {
+  .topbar { padding: 0 16px; gap: 10px; }
+  .topbar-right { gap: 8px; }
+  .topbar-user-name,
+  .cp-status { font-size: 0; gap: 0; padding: 8px; }
+  .topbar-user-name { display: none; }
+}

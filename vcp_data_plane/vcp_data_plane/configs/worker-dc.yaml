@@ -1,0 +1,36 @@
+
+worker_id: worker-dc
+
+csms:
+  # url: "ws://127.0.0.1:8765"
+  url: "ws://host.docker.internal:8765"
+
+fleet:
+  count: 5
+  id_prefix: "DC-"
+  id_start: 0
+  charge_point_id_prefix: "CP-DC-"
+  default_profile_id: generic_dc_ocpp201
+
+sharding:
+  shard_count: 1
+  shard_index: 0
+
+control_api:
+  host: "0.0.0.0"
+  port: 8080
+  token: ""
+  require_auth: false
+
+metrics:
+  host: "0.0.0.0"
+  port: 9090
+  enabled: true
+
+redis:
+  host: "vcp-cp-redis"
+  port: 6379
+  db: 0
+  ssl: false  
+
+default_ocpp_version: "2.0.1"

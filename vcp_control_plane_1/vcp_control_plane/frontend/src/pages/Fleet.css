@@ -1,0 +1,48 @@
+/* Buttons, forms and section titles live in styles/components.css */
+
+.fleet-page-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+  padding: 0 24px;
+}
+
+@media (max-width: 900px) {
+  .fleet-page-grid { grid-template-columns: 1fr; }
+}
+
+.fleet-section {
+  background: var(--p3-card);
+  border: 1px solid var(--p3-line);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.workers-head,
+.workers-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 60px;
+  gap: 12px;
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+.workers-head {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--p3-muted);
+  border-bottom: 1px solid var(--p3-line);
+}
+
+.workers-row { border-bottom: 1px solid var(--border-faint); color: var(--p3-text); }
+.workers-empty { color: var(--p3-muted); font-size: 14px; padding: 10px 0; }
+.worker-id { font-family: var(--font-mono); font-size: 12px; }
+.worker-status { font-weight: 700; font-size: 12px; }
+.worker-status--up { color: var(--p3-pass); }
+.worker-status--down { color: var(--p3-fail); }
+
+.bulk-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

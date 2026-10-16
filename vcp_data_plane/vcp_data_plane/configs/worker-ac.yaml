@@ -1,0 +1,48 @@
+worker_id: worker-ac
+
+csms:
+  # url: "ws://127.0.0.1:8765"
+  url: "ws://host.docker.internal:8765"
+
+redis:
+  host: "vcp-cp-redis"
+  port: 6379
+  db: 0
+  password: ""
+  ssl: false
+  command_stream_prefix: "vcp:commands:worker"
+  broadcast_stream: "vcp:commands:broadcast"
+  event_stream_prefix: "vcp:events:worker"
+  trace_stream_prefix: "vcp:trace"
+  state_hash_prefix: "vcp:state"
+  registry_key: "vcp:registry"
+  consumer_group: "data-plane"
+
+profile_dir: configs/profiles
+
+fleet:
+  count: 5
+  id_prefix: "AC-"
+  id_start: 0
+  charge_point_id_prefix: "CP-AC-"
+  default_profile_id: generic_ac_ocpp16
+
+vcps: []
+
+sharding:
+  shard_count: 2
+  shard_index: 0
+
+control_api:
+  host: "0.0.0.0"
+  port: 8080
+  token: ""
+  require_auth: false
+
+metrics:
+  host: "0.0.0.0"
+  port: 9090
+  enabled: true
+
+default_ocpp_version: "1.6J"
+log_level: "INFO"
