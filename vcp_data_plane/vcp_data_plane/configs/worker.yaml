@@ -16,7 +16,7 @@ worker_id: worker-01          # Must be unique across all workers in the cluster
 # CSMS (Central System) WebSocket endpoint
 # ---------------------------------------------------------------------------
 csms:
-  url: ws://127.0.0.1:8765   # wss:// for TLS
+  url: ws://localhost:8081/                                   #ws://127.0.0.1:8765   # wss:// for TLS
 
   # Authentication config (nested under `auth`)
   auth:

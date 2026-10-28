@@ -3,7 +3,9 @@ worker_id: worker-dc
 
 csms:
   # url: "ws://127.0.0.1:8765"
-  url: "ws://host.docker.internal:8765"
+  # url: "ws://host.docker.internal:8765"
+  url: "ws://host.docker.internal:8081"
+
 
 fleet:
   count: 5
@@ -33,4 +35,6 @@ redis:
   db: 0
   ssl: false  
 
-default_ocpp_version: "2.0.1"
+# default_ocpp_version: "2.0.1"
+
+default_ocpp_version: "1.6J"

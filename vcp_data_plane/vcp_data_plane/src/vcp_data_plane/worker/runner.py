@@ -271,6 +271,7 @@ class WorkerRunner:
             adapter=adapter,
             timer_scheduler=timers,
             metrics_hooks=self._metrics,
+            transaction_id_source=lambda: self._registry.next_transaction_id(entry.vcp_id),
         )
 
         # Fault injector

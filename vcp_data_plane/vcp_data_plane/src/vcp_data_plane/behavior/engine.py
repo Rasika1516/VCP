@@ -20,7 +20,7 @@ import asyncio
 import logging
 import random
 import uuid
-from typing import Any
+from typing import Any, Awaitable, Callable
 
 from vcp_data_plane.behavior.meter import MeterGenerator
 from vcp_data_plane.behavior.timer import VcpTimerScheduler
@@ -46,8 +46,11 @@ class BehaviorEngine:
         adapter: Any,                        # V16Adapter | V201Adapter
         timer_scheduler: VcpTimerScheduler,
         metrics_hooks: Any | None = None,
+        # OCPP 2.0.1: returns the next numeric transaction id for this VCP (None = unavailable)
+        transaction_id_source: Callable[[], Awaitable[int | None]] | None = None,
     ) -> None:
         self._entry = vcp_entry
+        self._transaction_id_source = transaction_id_source
         self._profile = profile
         self._state = state_machine
         self._adapter = adapter
@@ -233,7 +236,7 @@ class BehaviorEngine:
             connector.transaction_id = resp.transaction_id
         else:
             # OCPP 2.0.1: transaction_id is allocated locally; confirmed via TransactionEvent response
-            txn_id = str(uuid.uuid4())
+            txn_id = await self._new_transaction_id()
             connector.transaction_id = txn_id
             await self._adapter.send_transaction_event_started(
                 transaction_id=txn_id,
@@ -265,6 +268,21 @@ class BehaviorEngine:
         if self._hooks:
             self._hooks.on_transaction_started(self._entry.vcp_id)
         return True
+
+    async def _new_transaction_id(self) -> str:
+        """Numeric per-VCP id ("1", "2" …) like the CSMS-assigned OCPP 1.6 ids.
+
+        Falls back to a UUID when no counter is available, so ids never repeat
+        for the same station.
+        """
+        if self._transaction_id_source is not None:
+            try:
+                seq = await self._transaction_id_source()
+                if seq is not None:
+                    return str(seq)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("[%s] Transaction id counter unavailable, using UUID: %s", self._entry.vcp_id, exc)
+        return str(uuid.uuid4())
 
     async def stop_charge(self, reason: str = "Local", evse_id: int = 1, connector_id: int = 1) -> None:
         """Stop a charging transaction."""
@@ -348,7 +366,7 @@ class BehaviorEngine:
                 evse_id=evse_id,
                 connector_id=connector_id,
                 trigger_reason="MeterValuePeriodic",
-                meter_values=[{"timestamp": MeterGenerator._now_iso(), "sampledValue": sampled}]
+                meter_values=[{"timestamp": self._now_iso(), "sampledValue": sampled}]
                 if sampled else None,
             )
 
@@ -356,8 +374,8 @@ class BehaviorEngine:
     # CSMS-initiated command handlers (called by OCPP handlers)
     # ------------------------------------------------------------------
 
-    async def on_remote_start(self, connector_id: int | None, id_tag: str) -> bool:
-        evse_id = 1
+    async def on_remote_start(self, connector_id: int | None, id_tag: str, evse_id: int | None = None) -> bool:
+        evse_id = evse_id or 1
         conn_id = connector_id or 1
         conn = self._state.get_connector(evse_id, conn_id)
         if conn.state == VcpState.AVAILABLE:
@@ -369,7 +387,7 @@ class BehaviorEngine:
 
     async def on_remote_start_v201(self, evse_id: int | None, connector_id: int | None, id_token: str, id_token_type: str, remote_start_id: int) -> str:
         self._remote_start_id = remote_start_id
-        return "Accepted" if await self.on_remote_start(connector_id, id_token) else "Rejected"
+        return "Accepted" if await self.on_remote_start(connector_id, id_token, evse_id) else "Rejected"
 
     async def on_remote_stop(self, transaction_id: int | str) -> bool:
         for (eid, cid), conn in self._state._connectors.items():
@@ -536,8 +554,8 @@ class BehaviorEngine:
         except Exception as exc:  # noqa: BLE001
             logger.debug("[%s] StatusNotification error: %s", self._entry.vcp_id, exc)
 
-    # Utility for meter.py reference (avoids import in lambda)
+    # Timestamp for OCPP 2.0.1 meterValue entries (same format as the 2.0.1 messages)
     @staticmethod
     def _now_iso() -> str:
-        import datetime
-        return datetime.datetime.now(datetime.timezone.utc).isoformat()
+        from vcp_data_plane.ocpp.v201.messages import _now_iso
+        return _now_iso()

@@ -14,7 +14,38 @@ from typing import Any
 
 
 def _now_iso() -> str:
-    return datetime.datetime.now(datetime.timezone.utc).isoformat()
+    r"""UTC timestamp with millisecond precision, e.g. 2026-10-19T05:03:42.733Z.
+
+    CitrineOS validates 2.0.1 date-time fields against
+    ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+\-]\d{2}:\d{2})$
+    — at most 3 fractional digits — so the default isoformat() (microseconds)
+    is rejected with FormatViolation.
+    """
+    now = datetime.datetime.now(datetime.timezone.utc)
+    return now.isoformat(timespec="milliseconds").replace("+00:00", "Z")
+
+
+# OCPP 2.0.1 ConnectorStatusEnumType has only these values; the engine uses
+# OCPP 1.6-style names (Preparing, Charging, Finishing …), which map to Occupied.
+CONNECTOR_STATUSES = ("Available", "Occupied", "Reserved", "Unavailable", "Faulted")
+_CONNECTOR_STATUS_MAP = {
+    "Preparing": "Occupied",
+    "Authorized": "Occupied",
+    "Charging": "Occupied",
+    "SuspendedEV": "Occupied",
+    "SuspendedEVSE": "Occupied",
+    "Suspended": "Occupied",
+    "Finishing": "Occupied",
+    "Recovering": "Unavailable",
+    "Offline": "Unavailable",
+}
+
+
+def to_connector_status(status: str) -> str:
+    """Map an engine / OCPP 1.6 status name to the OCPP 2.0.1 ConnectorStatusEnumType."""
+    if status in CONNECTOR_STATUSES:
+        return status
+    return _CONNECTOR_STATUS_MAP.get(status, "Unavailable")
 
 
 # ---------------------------------------------------------------------------
@@ -54,7 +85,7 @@ def status_notification(
 ) -> dict[str, Any]:
     return {
         "timestamp": timestamp,
-        "connectorStatus": connector_status,    # Available | Occupied | Faulted | Unavailable | Reserved
+        "connectorStatus": to_connector_status(connector_status),
         "evseId": evse_id,
         "connectorId": connector_id,
     }

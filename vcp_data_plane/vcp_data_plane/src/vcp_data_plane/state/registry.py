@@ -67,6 +67,17 @@ class VcpRegistry:
     def count(self) -> int:
         return len(self._machines)
 
+    async def next_transaction_id(self, vcp_id: str) -> int | None:
+        """Next OCPP 2.0.1 transaction id for this VCP (1, 2, 3 …).
+
+        Kept in Redis (vcp:txn_seq:{vcp_id}) so ids keep increasing across worker
+        restarts and never reuse one the CSMS has already stored for the station.
+        Returns None when Redis is not connected.
+        """
+        if self._redis is None:
+            return None
+        return int(await self._redis.incr(f"vcp:txn_seq:{vcp_id}"))
+
     async def publish_state(self, vcp_id: str) -> None:
         """Write the VCP's current state snapshot to Redis."""
         if self._redis is None:

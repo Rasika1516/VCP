@@ -10,9 +10,10 @@ version: "1.0.0"
 
 vendor: "GenericEV"
 model: "FastCharge-150"
-firmware: "3.1.0"
+firmware: "5.0.0"
 
-ocpp_version: "2.0.1"
+# ocpp_version: "2.0.1"
+ocpp_version: "1.6J"
 
 # ---------------------------------------------------------------------------
 # Physical layout
@@ -51,9 +52,9 @@ capabilities:
   trigger_message: true
   diagnostics: false
   firmware_update: true
-  smart_charging: true
+  smart_charging: false       #true
   local_auth_list: true
-  reserve_now: true
+  reserve_now: false       #true
   data_transfer: false
 
 # ---------------------------------------------------------------------------

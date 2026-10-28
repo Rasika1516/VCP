@@ -2,7 +2,8 @@ worker_id: worker-ac
 
 csms:
   # url: "ws://127.0.0.1:8765"
-  url: "ws://host.docker.internal:8765"
+  # url: "ws://host.docker.internal:8765"
+  url: "ws://host.docker.internal:8081"
 
 redis:
   host: "vcp-cp-redis"
